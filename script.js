@@ -1,342 +1,305 @@
 /* ============================================================
-   CACHATTO Enterprise – script.js  v2
-   Theme Engine · Router · Nav · Animations · FAQ · Counters
+   CACHATTO – Product Page  |  script.js
+   Light Mode Only · FAQ Accordion · Testimonial Carousel
+   Scroll Animations · Sticky Nav · Mobile Menu
    ============================================================ */
+
 (function () {
   'use strict';
 
-  /* ──────────────────────────────────────────
-     THEME ENGINE
-     ────────────────────────────────────────── */
-  const THEME_KEY  = 'cachatto-theme';
-  const THEMES     = { DARK: 'dark', LIGHT: 'light' };
+  /* ── HELPERS ─────────────────────────────────────────────── */
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-  /**
-   * Read the currently active theme from the <html> attribute.
-   * (Already set by the inline bootstrap script in <head>.)
-   */
-  function getCurrentTheme() {
-    return document.documentElement.getAttribute('data-theme') || THEMES.DARK;
+  /* ── 1. STICKY NAV ────────────────────────────────────────── */
+  const nav = $('#mainNav');
+  if (nav) {
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
-  /**
-   * Apply a theme:
-   *  1. Set data-theme on <html>
-   *  2. Persist to localStorage
-   *  3. Update all toggle UI (desktop + mobile)
-   */
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem(THEME_KEY, theme);
-    syncToggleUI(theme);
-  }
+  /* ── 2. MOBILE HAMBURGER ──────────────────────────────────── */
+  const hamburger  = $('#hamburger');
+  const mobileNav  = $('#mobileNav');
 
-  function toggleTheme() {
-    const next = getCurrentTheme() === THEMES.DARK ? THEMES.LIGHT : THEMES.DARK;
-    applyTheme(next);
-  }
-
-  /**
-   * Sync the visual state of every theme-toggle button & label on the page.
-   */
-  function syncToggleUI(theme) {
-    const isDark  = theme === THEMES.DARK;
-    const icon    = isDark ? '🌙' : '☀️';
-    const label   = isDark ? 'Dark'  : 'Light';
-    const labelMobile = isDark ? 'Dark mode' : 'Light mode';
-
-    // Desktop toggle
-    const themeIcon  = document.getElementById('themeIcon');
-    const themeLabel = document.getElementById('themeLabel');
-    if (themeIcon)  themeIcon.textContent  = icon;
-    if (themeLabel) themeLabel.textContent = label;
-
-    // Mobile toggle
-    const mobileThemeIcon  = document.getElementById('mobileThemeIcon');
-    const mobileThemeLabel = document.getElementById('mobileThemeLabel');
-    if (mobileThemeIcon)  mobileThemeIcon.textContent  = icon;
-    if (mobileThemeLabel) mobileThemeLabel.textContent = labelMobile;
-
-    // ARIA label on all toggle buttons
-    document.querySelectorAll('.theme-toggle').forEach(btn => {
-      btn.setAttribute(
-        'aria-label',
-        `Switch to ${isDark ? 'light' : 'dark'} mode (currently ${label.toLowerCase()})`
-      );
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-  }
 
-  function initTheme() {
-    // The <head> script already applied the theme; just sync UI
-    syncToggleUI(getCurrentTheme());
+    // Close on any link click
+    $$('a', mobileNav).forEach(a => {
+      a.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
 
-    // Bind desktop toggle
-    const toggle = document.getElementById('themeToggle');
-    if (toggle) toggle.addEventListener('click', toggleTheme);
-
-    // Bind mobile toggle
-    const mobileToggle = document.getElementById('mobileThemeToggle');
-    if (mobileToggle) mobileToggle.addEventListener('click', toggleTheme);
-
-    // Listen for OS preference change (only if user hasn't made a manual choice)
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-      if (!localStorage.getItem(THEME_KEY)) {
-        applyTheme(e.matches ? THEMES.LIGHT : THEMES.DARK);
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !mobileNav.contains(e.target)) {
+        mobileNav.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
       }
     });
   }
 
-  /* ──────────────────────────────────────────
-     SPA ROUTER
-  ──────────────────────────────────────────── */
-  const PAGE_MAP = {
-    home:         'homePage',
-    cachatto:     'page-cachatto',
-    ninjaconnect: 'page-ninjaconnect',
-    ninjaism:     'page-ninjaism',
-  };
-
-  function showPage(key) {
-    const id = PAGE_MAP[key] || PAGE_MAP.home;
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    const target = document.getElementById(id);
-    if (target) {
-      target.classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      // Re-trigger fade-ins for the new page content
-      requestAnimationFrame(observeFadeIns);
-    }
-  }
-
-  function bindProductLinks() {
-    document.querySelectorAll('[data-product]').forEach(el => {
-      el.addEventListener('click', function (e) {
-        e.preventDefault();
-        showPage(this.dataset.product);
-        closeMobileMenu();
-      });
-    });
-
-    document.querySelectorAll('[data-back]').forEach(el => {
-      el.addEventListener('click', function (e) {
-        e.preventDefault();
-        showPage(this.dataset.back);
-      });
-    });
-
-    ['logoHome', 'navHome', 'mNavHome'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) {
-        el.addEventListener('click', e => {
-          e.preventDefault();
-          showPage('home');
-          closeMobileMenu();
-        });
-      }
-    });
-  }
-
-  /* ──────────────────────────────────────────
-     MOBILE NAVIGATION
-  ──────────────────────────────────────────── */
-  const hamburgerBtn = document.getElementById('hamburgerBtn');
-  const mobileNav    = document.getElementById('mobileNav');
-  const mobileClose  = document.getElementById('mobileClose');
-
-  function openMobileMenu() {
-    mobileNav.classList.add('open');
-    hamburgerBtn.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeMobileMenu() {
-    mobileNav.classList.remove('open');
-    if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMobileMenu);
-  if (mobileClose)  mobileClose.addEventListener('click', closeMobileMenu);
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeMobileMenu();
-  });
-
-  /* ──────────────────────────────────────────
-     SMOOTH SCROLL
-  ──────────────────────────────────────────── */
-  document.addEventListener('click', function (e) {
-    const anchor = e.target.closest('a[href^="#"]');
-    if (!anchor) return;
-    const targetId = anchor.getAttribute('href').slice(1);
-    if (!targetId) return;
-    const target = document.getElementById(targetId);
-    if (target) {
+  /* ── 3. SMOOTH SCROLL (nav links) ────────────────────────── */
+  $$('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
       e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      closeMobileMenu();
-    }
+      const offset = 75; // nav height
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
   });
 
-  /* ──────────────────────────────────────────
-     NAV SCROLL EFFECT
-  ──────────────────────────────────────────── */
-  const mainNav = document.getElementById('mainNav');
-  function updateNav() {
-    if (!mainNav) return;
-    mainNav.style.borderBottomColor = window.scrollY > 60
-      ? 'var(--nav-border)'
-      : 'transparent';
-  }
-  window.addEventListener('scroll', updateNav, { passive: true });
-  updateNav();
-
-  /* ──────────────────────────────────────────
-     INTERSECTION OBSERVER – fade-in
-  ──────────────────────────────────────────── */
-  let fadeObserver;
-
-  function observeFadeIns() {
-    const els = document.querySelectorAll('.page.active .fade-in:not(.visible)');
-    if (!els.length) return;
-    if (fadeObserver) fadeObserver.disconnect();
-
-    fadeObserver = new IntersectionObserver(
-      entries => {
+  /* ── 4. SCROLL ANIMATIONS (IntersectionObserver) ──────────── */
+  const fadeEls = $$('.fade-up');
+  if (fadeEls.length && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            fadeObserver.unobserve(entry.target);
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.10, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
-    els.forEach(el => fadeObserver.observe(el));
+    fadeEls.forEach(el => observer.observe(el));
+  } else {
+    // Fallback: show immediately
+    fadeEls.forEach(el => el.classList.add('visible'));
   }
 
-  /* ──────────────────────────────────────────
-     ANIMATED COUNTERS
-  ──────────────────────────────────────────── */
-  const counterObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          counterObserver.unobserve(entry.target);
+  /* ── 5. FAQ ACCORDION ─────────────────────────────────────── */
+  const faqItems = $$('.faq-item');
+
+  faqItems.forEach(item => {
+    const btn = $('.faq-q', item);
+    const answer = $('.faq-a', item);
+    if (!btn || !answer) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+
+      // Close all others
+      faqItems.forEach(other => {
+        if (other !== item) {
+          other.classList.remove('open');
+          const ob = $('.faq-q', other);
+          if (ob) ob.setAttribute('aria-expanded', 'false');
         }
       });
-    },
-    { threshold: 0.4 }
-  );
+
+      // Toggle this one
+      item.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    // Keyboard: Enter / Space handled by button natively
+    // Additional: Escape key closes
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        item.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.blur();
+      }
+    });
+  });
+
+  /* ── 6. TESTIMONIAL CAROUSEL ──────────────────────────────── */
+  const track     = $('#testiTrack');
+  const prevBtn   = $('#testiPrev');
+  const nextBtn   = $('#testiNext');
+  const dotsWrap  = $('#testiDots');
+
+  if (track && prevBtn && nextBtn && dotsWrap) {
+    const cards = $$('.testi-card', track);
+    const dots  = $$('.testi-dot', dotsWrap);
+    const total = cards.length;
+
+    let current   = 0;
+    let autoTimer = null;
+    let perView   = getPerView();
+
+    function getPerView() {
+      if (window.innerWidth <= 768)  return 1;
+      if (window.innerWidth <= 1024) return 2;
+      return 3;
+    }
+
+    function getCardWidth() {
+      if (!cards[0]) return 0;
+      const gap = 24; // matches --s3
+      return cards[0].offsetWidth + gap;
+    }
+
+    function clamp(val) {
+      const max = Math.max(0, total - perView);
+      return Math.max(0, Math.min(val, max));
+    }
+
+    function goTo(index) {
+      current = clamp(index);
+      track.style.transform = `translateX(-${current * getCardWidth()}px)`;
+
+      // Active card highlight
+      cards.forEach((c, i) => c.classList.toggle('is-active', i === current));
+
+      // Dots
+      const maxDot = Math.max(0, total - perView);
+      dots.forEach((d, i) => {
+        const active = i === Math.min(current, maxDot);
+        d.classList.toggle('active', active);
+        d.setAttribute('aria-current', active ? 'true' : 'false');
+      });
+
+      // Button states
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= total - perView;
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    prevBtn.addEventListener('click', () => { prev(); resetAuto(); });
+    nextBtn.addEventListener('click', () => { next(); resetAuto(); });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => { goTo(i); resetAuto(); });
+    });
+
+    // Auto-advance
+    function startAuto() {
+      autoTimer = setInterval(() => {
+        if (current >= total - perView) goTo(0);
+        else next();
+      }, 5000);
+    }
+    function resetAuto() {
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    // Touch / swipe
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const delta = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(delta) > 40) {
+        delta > 0 ? next() : prev();
+        resetAuto();
+      }
+    }, { passive: true });
+
+    // Keyboard accessibility
+    [prevBtn, nextBtn].forEach(btn => {
+      btn.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') { prev(); resetAuto(); }
+        if (e.key === 'ArrowRight') { next(); resetAuto(); }
+      });
+    });
+
+    // Resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        perView = getPerView();
+        goTo(clamp(current));
+      }, 200);
+    });
+
+    // Init
+    goTo(0);
+    startAuto();
+
+    // Pause on hover/focus
+    track.closest('section').addEventListener('mouseenter', () => clearInterval(autoTimer));
+    track.closest('section').addEventListener('mouseleave', startAuto);
+    track.closest('section').addEventListener('focusin',   () => clearInterval(autoTimer));
+    track.closest('section').addEventListener('focusout',  startAuto);
+  }
+
+  /* ── 7. ACTIVE NAV HIGHLIGHT (scroll spy) ─────────────────── */
+  const sections = $$('section[id], div[id]');
+  const navLinks = $$('.nav__links a');
+
+  if (sections.length && navLinks.length && 'IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navLinks.forEach(link => {
+              const match = link.getAttribute('href') === `#${id}`;
+              link.style.color = match ? 'var(--c-blue)' : '';
+              link.style.fontWeight = match ? '600' : '';
+            });
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    sections.forEach(s => spy.observe(s));
+  }
+
+  /* ── 8. COUNTER ANIMATION (hero stats) ────────────────────── */
+  const statVals = $$('.hero__stat-val');
 
   function animateCounter(el) {
-    if (el.dataset.done) return;
-    el.dataset.done = '1';
-    const target = parseInt(el.dataset.target, 10);
-    const steps = Math.round(1800 / 16);
-    const increment = target / steps;
-    let current = 0;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) { current = target; clearInterval(timer); }
-      el.textContent = Math.floor(current).toLocaleString();
-    }, 16);
+    const text = el.textContent.trim();
+    const num = parseFloat(text.replace(/[^0-9.]/g, ''));
+    const suffix = text.replace(/[0-9.]/g, '').trim();
+    if (isNaN(num) || num === 0) return;
+
+    const duration = 1600;
+    const start = performance.now();
+
+    function frame(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+      const val = Math.round(ease * num * 10) / 10;
+      el.textContent = (Number.isInteger(num) ? Math.round(val) : val.toFixed(1)) + suffix;
+      if (progress < 1) requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
   }
 
-  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
-
-  /* ──────────────────────────────────────────
-     FAQ ACCORDION
-  ──────────────────────────────────────────── */
-  function initFAQs() {
-    document.querySelectorAll('.faq__q').forEach(btn => {
-      if (btn._faqBound) return;   // idempotent
-      btn._faqBound = true;
-      btn.addEventListener('click', function () {
-        const item   = this.closest('.faq__item');
-        const isOpen = item.classList.contains('open');
-        // Close siblings
-        const list = item.closest('.faq__list');
-        if (list) {
-          list.querySelectorAll('.faq__item.open').forEach(openItem => {
-            openItem.classList.remove('open');
-            openItem.querySelector('.faq__q').setAttribute('aria-expanded', 'false');
-          });
-        }
-        if (!isOpen) {
-          item.classList.add('open');
-          this.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
+  if ('IntersectionObserver' in window && statVals.length) {
+    const counterObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            counterObs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    statVals.forEach(el => counterObs.observe(el));
   }
 
-  /* ──────────────────────────────────────────
-     HERO PARALLAX (subtle)
-  ──────────────────────────────────────────── */
-  const heroBg   = document.querySelector('.hero__bg');
-  const heroGrid = document.querySelector('.hero__grid');
+  /* ── 9. FORM PLACEHOLDER (contact CTA) ────────────────────── */
+  // Future: replace with real form submission endpoint
 
-  function heroParallax() {
-    if (!heroBg || window.innerWidth < 768) return;
-    const y = window.scrollY;
-    heroBg.style.transform  = `translateY(${y * 0.22}px)`;
-    heroGrid.style.transform = `translateY(${y * 0.08}px)`;
-  }
-  window.addEventListener('scroll', heroParallax, { passive: true });
-
-  /* ──────────────────────────────────────────
-     PRODUCT CARD 3D TILT (desktop)
-  ──────────────────────────────────────────── */
-  function initTilt() {
-    if (window.innerWidth < 768) return;
-    document.querySelectorAll('.product-card').forEach(card => {
-      if (card._tiltBound) return;
-      card._tiltBound = true;
-      card.style.transformStyle = 'preserve-3d';
-      card.style.willChange = 'transform';
-      card.addEventListener('mousemove', function (e) {
-        const r = this.getBoundingClientRect();
-        const x = (e.clientX - r.left)  / r.width  - 0.5;
-        const y = (e.clientY - r.top)   / r.height - 0.5;
-        this.style.transform = `translateY(-4px) rotateY(${x * 6}deg) rotateX(${-y * 4}deg)`;
-      });
-      card.addEventListener('mouseleave', function () {
-        this.style.transform = '';
-      });
-    });
-  }
-
-  /* ──────────────────────────────────────────
-     MUTATION OBSERVER
-     Re-init interactive elements when SPA switches pages
-  ──────────────────────────────────────────── */
-  const bodyObserver = new MutationObserver(() => {
-    observeFadeIns();
-    initFAQs();
-    initTilt();
-  });
-  bodyObserver.observe(document.body, {
-    childList: false, subtree: true,
-    attributes: true, attributeFilter: ['class']
-  });
-
-  /* ──────────────────────────────────────────
-     INIT
-  ──────────────────────────────────────────── */
-  function init() {
-    initTheme();
-    bindProductLinks();
-    observeFadeIns();
-    initFAQs();
-    initTilt();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  console.log('[CACHATTO] Page loaded. Light mode. Version 3.0');
 
 })();
