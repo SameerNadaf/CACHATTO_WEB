@@ -3312,3 +3312,451 @@ p {
     max-height: 36px;
   }
 }
+
+
+/* ------------------------------------------------------------
+   PREMIUM BROCHURE PAGE (REDESIGN)
+------------------------------------------------------------ */
+.page-brochure {
+  background-color: #f8fafc;
+  overflow-x: hidden;
+}
+
+.brochure-page-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.brochure-header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 600px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  z-index: -1;
+  overflow: hidden;
+}
+
+.brochure-glow-1 {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 87, 184, 0.15) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.brochure-glow-2 {
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.brochure-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 160px 24px 100px;
+}
+
+.brochure-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .brochure-layout {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+
+.brochure-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: rgba(0, 87, 184, 0.2);
+  border: 1px solid rgba(0, 87, 184, 0.3);
+  color: #60a5fa;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.brochure-main-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.brochure-main-title span {
+  background: linear-gradient(90deg, #60a5fa, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brochure-intro-text {
+  font-size: 18px;
+  color: #94a3b8;
+  line-height: 1.6;
+  max-width: 540px;
+  margin-bottom: 48px;
+}
+
+.brochure-visual {
+  position: relative;
+  margin-bottom: 60px;
+}
+
+.brochure-mockup-wrapper {
+  position: relative;
+  z-index: 1;
+  transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+  transition: transform 0.5s ease;
+}
+
+.brochure-mockup-wrapper:hover {
+  transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+}
+
+.brochure-img {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 20px 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.mockup-shadow {
+  position: absolute;
+  bottom: -20px;
+  left: 5%;
+  width: 90%;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  filter: blur(20px);
+  border-radius: 100%;
+  z-index: -1;
+}
+
+.trust-pill {
+  position: absolute;
+  bottom: 40px;
+  right: -20px;
+  background: #ffffff;
+  padding: 12px 20px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  border: 1px solid #e2e8f0;
+}
+
+.trust-pill .material-symbols-outlined {
+  color: #10b981;
+  font-size: 22px;
+}
+
+.trust-pill span:last-child {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 640px) {
+  .highlights-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.highlight-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.highlight-icon {
+  width: 48px;
+  height: 48px;
+  background: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.highlight-icon span {
+  color: var(--c-blue);
+  font-size: 24px;
+}
+
+.highlight-text strong {
+  display: block;
+  font-size: 15px;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.highlight-text p {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Glassmorphism Form Card */
+.glass-form-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .glass-form-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+  }
+}
+
+.form-header {
+  margin-bottom: 40px;
+}
+
+.form-header h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.form-header p {
+  font-size: 15px;
+  color: #64748b;
+}
+
+.modern-form .form-group {
+  margin-bottom: 24px;
+}
+
+.modern-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 20px;
+}
+
+.modern-form input,
+.modern-form select,
+.modern-form textarea {
+  width: 100%;
+  padding: 14px 16px 14px 48px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1e293b;
+  transition: all 0.3s ease;
+}
+
+.modern-form select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 20px;
+}
+
+.modern-form textarea {
+  padding-left: 16px;
+  min-height: 100px;
+}
+
+.modern-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media (min-width: 640px) {
+  .modern-form .form-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
+
+.modern-form input:focus,
+.modern-form select:focus,
+.modern-form textarea:focus {
+  outline: none;
+  border-color: var(--c-blue);
+  box-shadow: 0 0 0 4px rgba(0, 87, 184, 0.1);
+}
+
+.btn-submit-modern {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 12px;
+  margin-top: 10px;
+  box-shadow: 0 10px 20px rgba(0, 87, 184, 0.2);
+}
+
+.form-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  font-size: 13px;
+  color: #64748b;
+  justify-content: center;
+}
+
+.form-success-modern {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.success-check {
+  width: 80px;
+  height: 80px;
+  background: #ecfdf5;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.success-check span {
+  font-size: 48px;
+  color: #10b981;
+}
+
+.form-success-modern h3 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.form-success-modern p {
+  font-size: 15px;
+  color: #64748b;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 20px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.form-group.has-error input,
+.form-group.has-error select {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.form-group.has-error .error-msg {
+  display: block;
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 1024px) {
+  .brochure-header-bg {
+    height: 400px;
+  }
+  .brochure-container {
+    padding-top: 120px;
+  }
+  .brochure-info {
+    text-align: center;
+  }
+  .brochure-intro-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .highlights-grid {
+    text-align: left;
+  }
+  .highlight-icon {
+    margin: 0 auto;
+  }
+  .highlight-item {
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .glass-form-card {
+    padding: 32px 24px;
+  }
+  .brochure-main-title {
+    font-size: 32px;
+  }
+}
+
