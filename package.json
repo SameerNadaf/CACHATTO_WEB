@@ -1,0 +1,9 @@
+{
+  "name": "cachatto-web",
+  "version": "1.0.0",
+  "description": "CACHATTO marketing website",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  }
+}

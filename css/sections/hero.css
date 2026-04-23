@@ -1,0 +1,457 @@
+/* ── 8. HERO SLIDER ───────────────────────────────────────── */
+.hero-slider-section {
+  position: relative;
+  background: var(--c-navy);
+  overflow: hidden;
+}
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+}
+
+.hero-track {
+  display: flex;
+  will-change: transform;
+}
+
+.hero-slide {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.hero-controls {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--s3);
+  z-index: 10;
+}
+
+.hero-slider-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.hero-slider-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.hero-slider-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.hero-slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.hero-slider-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: #60BFFF;
+}
+
+/* ── 8.1 HERO INNER ───────────────────────────────────────── */
+.hero {
+  background: var(--g-hero);
+  min-height: 82vh;
+  display: flex;
+  align-items: center;
+  padding: 90px var(--s3) 90px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero--telework {
+  background: linear-gradient(135deg, #0A1628 0%, #0d2747 45%, #0057B8 100%);
+}
+
+.hero--ism {
+  background: linear-gradient(135deg, #0A1628 0%, #172a3a 45%, #D84040 100%);
+}
+
+.hero__grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.hero__glow {
+  position: absolute;
+  top: -30%;
+  right: -15%;
+  width: 80%;
+  height: 140%;
+  background: radial-gradient(ellipse 55% 55% at 65% 50%, rgba(0, 153, 230, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s7);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--r-pill);
+  padding: 7px 16px;
+  margin-bottom: var(--s3);
+  font-size: 12px;
+  font-weight: 600;
+  color: #9CCFF8;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.hero__badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22C55E;
+  animation: livePulse 2s infinite;
+}
+
+@keyframes livePulse {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.45;
+    transform: scale(1.5);
+  }
+}
+
+.hero__headline {
+  color: #fff;
+  margin-bottom: var(--s3);
+}
+
+.hero__headline em {
+  font-style: normal;
+  background: linear-gradient(90deg, #60BFFF, #00E8FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero__subtext {
+  font-size: 17.5px;
+  color: rgba(255, 255, 255, 0.70);
+  margin-bottom: var(--s1);
+  line-height: 1.65;
+}
+
+.hero__supporting {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.44);
+  margin-bottom: var(--s5);
+  font-style: italic;
+  line-height: 1.55;
+}
+
+.hero__ctas {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  flex-wrap: wrap;
+  margin-bottom: var(--s6);
+}
+
+.hero__ctas--compact {
+  margin-top: var(--s4);
+  margin-bottom: var(--s6);
+}
+
+.hero__stats {
+  display: flex;
+  gap: var(--s6);
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  padding-top: var(--s4);
+}
+
+.hero__stat-val {
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.hero__stat-val span {
+  color: #60BFFF;
+}
+
+.hero__stat-label {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 4px;
+}
+
+/* Hero dashboard */
+.hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__dashboard {
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: var(--r-xl);
+  padding: var(--s3);
+  width: 100%;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.hero__dashboard--feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  text-align: center;
+}
+
+.hero__feature-icon {
+  font-size: clamp(56px, 6vw, 80px);
+  margin-bottom: var(--s2);
+}
+
+.hero__feature-icon--telework {
+  color: #60BFFF;
+}
+
+.hero__feature-icon--ism {
+  color: #F59E0B;
+}
+
+.hero__feature-title {
+  color: #fff;
+  margin-bottom: var(--s1);
+}
+
+.hero__feature-copy {
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+  max-width: 34ch;
+}
+
+.dash__titlebar {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-bottom: var(--s3);
+}
+
+.dash__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dash__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dash__dot.r {
+  background: #FF5F57;
+}
+
+.dash__dot.y {
+  background: #FEBC2E;
+}
+
+.dash__dot.g {
+  background: #28C840;
+}
+
+.dash__window-title {
+  flex: 1;
+  text-align: center;
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 500;
+}
+
+.dash__metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s2);
+  margin-bottom: var(--s2);
+}
+
+.dash__metric {
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--r-md);
+  padding: 14px;
+}
+
+.dash__metric-icon {
+  width: 30px;
+  height: 30px;
+  background: rgba(0, 153, 230, 0.22);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.dash__metric-icon .material-symbols-outlined {
+  font-size: 15px;
+  color: #60BFFF;
+}
+
+.dash__metric-val {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.dash__metric-lbl {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.42);
+  margin-top: 3px;
+}
+
+.dash__metric-chg {
+  font-size: 10px;
+  color: #22C55E;
+  margin-top: 4px;
+}
+
+.dash__status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--s2);
+}
+
+.dash__status {
+  flex: 1 1 130px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--r-sm);
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.dash__status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dash__status-dot.g {
+  background: #22C55E;
+  box-shadow: 0 0 5px #22C55E;
+}
+
+.dash__status-dot.b {
+  background: #60BFFF;
+  box-shadow: 0 0 5px #60BFFF;
+}
+
+.dash__status-dot.y {
+  background: #FBBF24;
+  box-shadow: 0 0 5px #FBBF24;
+}
+
+.dash__status-info {}
+
+.dash__status-title {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.80);
+  display: block;
+}
+
+.dash__status-sub {
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.40);
+}
+
+.dash__progress-bar {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.dash__progress-label {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+
+.dash__progress-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.dash__progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #0099E6, #22C55E);
+  width: 96%;
+}
+
+.dash__progress-val {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #22C55E;
+  flex-shrink: 0;
+}

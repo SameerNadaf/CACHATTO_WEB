@@ -1,0 +1,66 @@
+/* ── 6. BUTTONS ───────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: clamp(10px, 1.5vw, 13px) clamp(18px, 2.5vw, 26px);
+  border-radius: var(--r-pill);
+  font-size: clamp(13.5px, 1.2vw, 14.5px);
+  font-weight: 600;
+  line-height: 1;
+  transition: all 0.22s ease;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.btn .material-symbols-outlined {
+  font-size: 17px;
+}
+
+.btn-primary {
+  background: var(--c-blue);
+  color: #fff;
+  box-shadow: none;
+  border: 1px solid var(--c-blue);
+}
+
+.btn-primary:hover {
+  background: var(--c-blue-mid);
+  border-color: var(--c-blue-mid);
+  box-shadow: none;
+  transform: scale(1.02);
+}
+
+.btn-outline-white {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.38);
+}
+
+.btn-outline-white:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: #fff;
+}
+
+.btn-white {
+  background: #fff;
+  color: var(--c-blue);
+}
+
+.btn-white:hover {
+  background: #EBF2FF;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--c-text);
+  border: 1.5px solid var(--c-border);
+}
+
+.btn-outline:hover {
+  border-color: var(--c-blue);
+  color: var(--c-blue);
+  background: rgba(0, 87, 184, 0.04);
+}

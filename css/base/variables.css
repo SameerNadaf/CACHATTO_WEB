@@ -1,0 +1,63 @@
+/* ============================================================
+   CACHATTO – Enterprise Product Page  |  style.css
+   Light Mode Only · Inter · Material Symbols · 8pt Grid
+   ============================================================ */
+
+/* ── 1. CSS VARIABLES ─────────────────────────────────────── */
+:root {
+  /* Brand */
+  --c-navy: #0A1628;
+  --c-blue: #0057B8;
+  --c-blue-mid: #0077CC;
+  --c-blue-light: #0099E6;
+  --c-accent: #00C2FF;
+
+  /* Backgrounds */
+  --c-white: #FFFFFF;
+  --c-bg-section: #F4F8FF;
+  --c-bg-alt: #EBF2FF;
+
+  /* Text */
+  --c-text: #1A2B49;
+  --c-text-muted: #5A7298;
+  --c-text-light: #8AA0B8;
+
+  /* UI */
+  --c-border: #DDE8F6;
+  --c-success: #22C55E;
+  --c-warn: #F59E0B;
+
+  /* Gradients */
+  --g-hero: linear-gradient(135deg, #060F1E 0%, #0A1E3C 45%, #0057B8 100%);
+  --g-blue: linear-gradient(135deg, #0057B8, #0099E6);
+  --g-cta: linear-gradient(135deg, #0057B8 0%, #0099E6 100%);
+  --g-teal: linear-gradient(135deg, #0097A7, #0057B8);
+  --g-purple: linear-gradient(135deg, #5C35B8, #0057B8);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 4px rgba(0, 87, 184, 0.06);
+  --shadow-md: 0 4px 24px rgba(0, 87, 184, 0.10);
+  --shadow-lg: 0 8px 40px rgba(0, 87, 184, 0.16);
+
+  /* Font */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Spacing (8pt grid) */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s5: 40px;
+  --s6: 48px;
+  --s7: 64px;
+  --s8: 80px;
+  --s9: 96px;
+  --s10: 120px;
+
+  /* Radii */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+}

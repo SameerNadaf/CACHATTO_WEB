@@ -1,0 +1,567 @@
+/* ── Section wrapper ─────────────────────────────────────────── */
+.product-lineup-section {
+  background: #f7f9ff;
+  padding: var(--s10) var(--s3);
+  position: relative;
+  overflow: hidden;
+}
+
+.product-lineup-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(0, 87, 184, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(92, 53, 184, 0.05) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+/* ── Container ───────────────────────────────────────────────── */
+.pl-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Section Header ──────────────────────────────────────────── */
+.pl-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto var(--s8);
+}
+
+.pl-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: var(--c-blue);
+  background: rgba(0, 87, 184, 0.09);
+  border: 1px solid rgba(0, 87, 184, 0.18);
+  border-radius: var(--r-pill);
+  padding: 5px 18px;
+  margin-bottom: var(--s3);
+}
+
+.pl-title {
+  font-size: clamp(26px, 3.6vw, 42px);
+  font-weight: 800;
+  color: var(--c-navy);
+  letter-spacing: -0.7px;
+  line-height: 1.12;
+  margin-bottom: var(--s2);
+}
+
+.pl-subtitle {
+  font-size: 16px;
+  color: var(--c-text-muted);
+  line-height: 1.72;
+}
+
+/* ── 2×2 Grid ────────────────────────────────────────────────── */
+.pl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: var(--s8);
+}
+
+/* ── Card Base ───────────────────────────────────────────────── */
+.pl-card {
+  border-radius: 20px;
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid transparent;
+  transition:
+    transform 0.32s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.32s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.32s ease;
+  cursor: default;
+}
+
+/* Lift + glow on hover */
+.pl-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.13);
+}
+
+/* ── Card colour variants ────────────────────────────────────── */
+/* Blue — Secure Access Client */
+.pl-card--blue {
+  background: #eef3ff;
+  border-color: #d0dcff;
+}
+
+.pl-card--blue:hover {
+  box-shadow: 0 20px 50px rgba(0, 87, 184, 0.18), 0 0 0 1px rgba(0, 87, 184, 0.12);
+}
+
+.pl-card--blue .pl-card__tag {
+  color: #0057B8;
+  background: rgba(0, 87, 184, 0.10);
+}
+
+.pl-card--blue .pl-card__headline-accent {
+  color: #0057B8;
+}
+
+.pl-card--blue .pl-card__problems-label {
+  color: #0057B8;
+}
+
+.pl-card--blue .pl-card__problems-bar {
+  background: #0057B8;
+}
+
+.pl-card--blue .pl-card__brand-icon {
+  background: rgba(0, 87, 184, 0.14);
+  color: #0057B8;
+}
+
+.pl-card--blue .pl-card__cta {
+  background: #0057B8;
+}
+
+.pl-card--blue .pl-card__cta:hover {
+  background: #0077CC;
+  box-shadow: 0 4px 18px rgba(0, 87, 184, 0.40);
+}
+
+/* Purple — Isolated Workspace Switch */
+.pl-card--purple {
+  background: #eeebff;
+  border-color: #cfc8f8;
+}
+
+.pl-card--purple:hover {
+  box-shadow: 0 20px 50px rgba(92, 53, 184, 0.18), 0 0 0 1px rgba(92, 53, 184, 0.12);
+}
+
+.pl-card--purple .pl-card__tag {
+  color: #5C35B8;
+  background: rgba(92, 53, 184, 0.10);
+}
+
+.pl-card--purple .pl-card__headline-accent {
+  color: #5C35B8;
+}
+
+.pl-card--purple .pl-card__problems-label {
+  color: #5C35B8;
+}
+
+.pl-card--purple .pl-card__problems-bar {
+  background: #5C35B8;
+}
+
+.pl-card--purple .pl-card__brand-icon {
+  background: rgba(92, 53, 184, 0.14);
+  color: #5C35B8;
+}
+
+.pl-card--purple .pl-card__cta {
+  background: #5C35B8;
+}
+
+.pl-card--purple .pl-card__cta:hover {
+  background: #6e45d4;
+  box-shadow: 0 4px 18px rgba(92, 53, 184, 0.40);
+}
+
+/* Pink — Secure Cloud VPN */
+.pl-card--pink {
+  background: #fff0f5;
+  border-color: #ffc8d8;
+}
+
+.pl-card--pink:hover {
+  box-shadow: 0 20px 50px rgba(220, 38, 109, 0.15), 0 0 0 1px rgba(220, 38, 109, 0.10);
+}
+
+.pl-card--pink .pl-card__tag {
+  color: #DC266D;
+  background: rgba(220, 38, 109, 0.09);
+}
+
+.pl-card--pink .pl-card__headline-accent {
+  color: #DC266D;
+}
+
+.pl-card--pink .pl-card__problems-label {
+  color: #DC266D;
+}
+
+.pl-card--pink .pl-card__problems-bar {
+  background: #DC266D;
+}
+
+.pl-card--pink .pl-card__brand-icon {
+  background: rgba(220, 38, 109, 0.12);
+  color: #DC266D;
+}
+
+.pl-card--pink .pl-card__cta {
+  background: #e94d8b;
+}
+
+.pl-card--pink .pl-card__cta:hover {
+  background: #d0266a;
+  box-shadow: 0 4px 18px rgba(220, 38, 109, 0.40);
+}
+
+/* Amber — Remote Desktop Lite */
+.pl-card--amber {
+  background: #fffaee;
+  border-color: #ffe4a0;
+}
+
+.pl-card--amber:hover {
+  box-shadow: 0 20px 50px rgba(217, 119, 6, 0.15), 0 0 0 1px rgba(217, 119, 6, 0.10);
+}
+
+.pl-card--amber .pl-card__tag {
+  color: #B45309;
+  background: rgba(245, 158, 11, 0.12);
+}
+
+.pl-card--amber .pl-card__headline-accent {
+  color: #B45309;
+}
+
+.pl-card--amber .pl-card__problems-label {
+  color: #B45309;
+}
+
+.pl-card--amber .pl-card__problems-bar {
+  background: #F59E0B;
+}
+
+.pl-card--amber .pl-card__brand-icon {
+  background: rgba(245, 158, 11, 0.15);
+  color: #B45309;
+}
+
+.pl-card--amber .pl-card__cta {
+  background: #F59E0B;
+  color: #1a2b49;
+}
+
+.pl-card--amber .pl-card__cta:hover {
+  background: #d97706;
+  box-shadow: 0 4px 18px rgba(217, 119, 6, 0.40);
+  color: #fff;
+}
+
+/* ── Card: Tag pill ─────────────────────────────────────────── */
+.pl-card__tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: var(--r-pill);
+  padding: 4px 12px;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+/* ── Card: Headline ─────────────────────────────────────────── */
+.pl-card__headline {
+  font-size: clamp(16px, 1.8vw, 19px);
+  font-weight: 700;
+  color: var(--c-navy);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.pl-card__headline-accent {
+  /* colour set per variant above */
+}
+
+/* ── Card: Brand row (icon + name + mockup) ─────────────────── */
+.pl-card__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.pl-card__brand-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.pl-card:hover .pl-card__brand-icon {
+  transform: scale(1.1) rotate(-4deg);
+}
+
+.pl-card__brand-icon .material-symbols-outlined {
+  font-size: 22px;
+}
+
+.pl-card__brand-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--c-navy);
+  flex: 1;
+}
+
+/* ── CSS Laptop Mockup Illustration ────────────────────────── */
+.pl-card__mockup {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.pl-card:hover .pl-card__mockup {
+  transform: translateY(-55%) scale(1.06);
+}
+
+.pl-mockup--laptop {
+  width: 100px;
+}
+
+.pl-mockup__screen {
+  width: 100%;
+  border-radius: 6px 6px 2px 2px;
+  background: #c8d4f0;
+  border: 2.5px solid #8fa0c0;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.pl-card--purple .pl-mockup__screen {
+  background: #d5cdf6;
+  border-color: #9e8fe0;
+}
+
+.pl-card--pink .pl-mockup__screen {
+  background: #ffd8e6;
+  border-color: #e8a0bc;
+}
+
+.pl-card--amber .pl-mockup__screen {
+  background: #ffeeba;
+  border-color: #d4ae60;
+}
+
+.pl-mockup__screen-bar {
+  height: 8px;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.pl-mockup__screen-content {
+  padding: 6px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pl-mockup__row {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 3px;
+}
+
+.pl-mockup__row--short {
+  width: 60%;
+}
+
+.pl-mockup__base {
+  height: 6px;
+  background: #8fa0c0;
+  border-radius: 0 0 4px 4px;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.pl-card--purple .pl-mockup__base {
+  background: #9e8fe0;
+}
+
+.pl-card--pink .pl-mockup__base {
+  background: #e8a0bc;
+}
+
+.pl-card--amber .pl-mockup__base {
+  background: #d4ae60;
+}
+
+/* ── Card: Problems block ───────────────────────────────────── */
+.pl-card__problems {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 12px;
+  padding: 14px 16px;
+  backdrop-filter: blur(4px);
+}
+
+.pl-card__problems-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.pl-card__problems-bar {
+  display: inline-block;
+  width: 4px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.pl-card__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-left: 11px;
+  list-style: disc;
+}
+
+.pl-card__bullets li {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text);
+  line-height: 1.5;
+}
+
+/* ── Card: Description ──────────────────────────────────────── */
+.pl-card__desc {
+  font-size: 13.5px;
+  color: var(--c-text-muted);
+  line-height: 1.68;
+  margin: 0;
+}
+
+/* ── Card: CTA button ───────────────────────────────────────── */
+.pl-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 22px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  width: fit-content;
+  margin-top: auto;
+  transition: background 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+.pl-card__cta:hover {
+  transform: translateX(3px);
+}
+
+/* ── Bottom CTAs ────────────────────────────────────────────── */
+.pl-ctas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.pl-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 34px;
+  border-radius: var(--r-pill);
+  font-size: 14.5px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+/* Outline style — "What is CACHATTO One?" */
+.pl-cta-btn--outline {
+  background: transparent;
+  color: var(--c-blue);
+  border: 2px solid var(--c-blue);
+  box-shadow: 0 2px 12px rgba(0, 87, 184, 0.08);
+}
+
+.pl-cta-btn--outline:hover {
+  background: rgba(0, 87, 184, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 87, 184, 0.16);
+  transform: translateY(-2px);
+}
+
+/* Filled style — "Read all about each product" */
+.pl-cta-btn--filled {
+  background: linear-gradient(135deg, #e94d8b 0%, #c0266a 100%);
+  color: #fff;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 18px rgba(220, 38, 109, 0.28);
+}
+
+.pl-cta-btn--filled:hover {
+  background: linear-gradient(135deg, #d0266a 0%, #a81d55 100%);
+  box-shadow: 0 6px 28px rgba(220, 38, 109, 0.42);
+  transform: translateY(-2px);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .pl-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pl-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .product-lineup-section {
+    padding: var(--s9) var(--s2);
+  }
+
+  .pl-ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pl-cta-btn {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pl-card {
+    padding: 24px 20px 22px;
+  }
+
+  .pl-card__mockup {
+    display: none;
+  }
+
+  .pl-card__brand {
+    flex-wrap: wrap;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PARTNERSHIPS – Premium Logo Carousel
+═══════════════════════════════════════════════════════════════ */

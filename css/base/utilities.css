@@ -1,0 +1,127 @@
+/* ── 5. LAYOUT UTILITIES ──────────────────────────────────── */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 var(--s3);
+}
+
+.section {
+  padding: var(--s9) var(--s3);
+}
+
+.section--alt {
+  background: var(--c-bg-section);
+}
+
+.section--light-gray {
+  background: #f8fafc;
+}
+
+.section--dark {
+  background: var(--c-navy);
+}
+
+/* Side-by-Side Split Layout */
+.split-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s5);
+  align-items: center;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+@media (min-width: 900px) {
+  .split-layout {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--s8);
+  }
+
+  .split-layout>* {
+    flex: 1;
+  }
+
+  .split-layout--reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+.split-image-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-md);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+}
+
+.section--dark .split-image-wrapper img {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.section--dark .hover-lift:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--s7);
+}
+
+.section-header.left-aligned {
+  text-align: left;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--c-blue);
+  background: rgba(0, 87, 184, 0.08);
+  border: 1px solid rgba(0, 87, 184, 0.15);
+  border-radius: var(--r-pill);
+  padding: 5px 14px;
+  margin-bottom: var(--s2);
+}
+
+.eyebrow--light {
+  color: #7EC8F4;
+  background: rgba(0, 153, 230, 0.12);
+  border-color: rgba(0, 153, 230, 0.25);
+}
+
+.eyebrow .material-symbols-outlined {
+  font-size: 14px;
+}
+
+.section-title {
+  color: var(--c-text);
+  margin-bottom: var(--s2);
+}
+
+.section-title--white {
+  color: #fff;
+}
+
+.section-desc {
+  font-size: 17px;
+  color: var(--c-text-muted);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.section-desc--white {
+  color: rgba(255, 255, 255, 0.65);
+}

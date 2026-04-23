@@ -1,0 +1,61 @@
+/* ── 17. CTA BANNER ───────────────────────────────────────── */
+.cta-banner {
+  background: var(--g-cta);
+  padding: var(--s9) var(--s3);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+.cta-banner__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+.cta-banner__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: var(--s2);
+}
+
+.cta-banner__eyebrow .material-symbols-outlined {
+  font-size: 15px;
+}
+
+.cta-banner h2 {
+  color: #fff;
+  font-size: clamp(28px, 4vw, 44px);
+  margin-bottom: var(--s2);
+}
+
+.cta-banner>.cta-banner__inner>p {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: var(--s5);
+}
+
+.cta-banner__ctas {
+  display: flex;
+  justify-content: center;
+  gap: var(--s2);
+  flex-wrap: wrap;
+}

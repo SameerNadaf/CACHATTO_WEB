@@ -1,0 +1,99 @@
+/* ── 10. POLICY SECTION ───────────────────────────────────── */
+.policy-section {}
+
+.policy-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+}
+
+/* Generic feature card */
+.f-card {
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  padding: var(--s4);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.f-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--g-blue);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.f-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(0, 87, 184, 0.22);
+}
+
+.f-card:hover::before {
+  opacity: 1;
+}
+
+.f-card__icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(0, 87, 184, 0.08);
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--s3);
+  transition: background 0.25s;
+}
+
+.f-card:hover .f-card__icon {
+  background: rgba(0, 87, 184, 0.14);
+}
+
+.f-card__icon .material-symbols-outlined {
+  font-size: 26px;
+  color: var(--c-blue);
+}
+
+.f-card__title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: var(--s1);
+  color: var(--c-text);
+}
+
+.f-card__desc {
+  font-size: 14px;
+  color: var(--c-text-muted);
+  line-height: 1.65;
+}
+
+.f-card__list {
+  margin-top: var(--s2);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.f-card__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--c-text-muted);
+}
+
+.f-card__list li .material-symbols-outlined {
+  font-size: 15px;
+  color: var(--c-success);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
