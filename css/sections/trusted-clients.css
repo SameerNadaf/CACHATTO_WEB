@@ -1,0 +1,113 @@
+/* ------------------------------------------------------------
+   BACKGROUND GRID LINES UTILITY
+------------------------------------------------------------ */
+.bg-grid-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  z-index: 0;
+}
+
+/* Ensure sections containing absolute elements are relative */
+.perimeter-section, .testimonials-section, .hero {
+  position: relative;
+}
+
+/* ------------------------------------------------------------
+   TRUSTED CLIENTS
+------------------------------------------------------------ */
+.trusted-clients {
+  background: var(--c-bg-section);
+  position: relative;
+  overflow: hidden;
+  padding: 100px var(--s3);
+}
+
+.trusted-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.trusted-title {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 700;
+  color: var(--c-slate);
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+
+.trusted-divider {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--c-blue), var(--c-cyan));
+  margin: 0 auto 24px;
+  border-radius: 2px;
+}
+
+.trusted-subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+}
+
+.trusted-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.trusted-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.trusted-logo img {
+  max-width: 100%;
+  max-height: 48px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  mix-blend-mode: multiply;
+}
+
+.trusted-logo:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+  .trusted-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trusted-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .trusted-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .trusted-logo {
+    height: 60px;
+  }
+  .trusted-logo img {
+    max-height: 36px;
+  }
+}
+

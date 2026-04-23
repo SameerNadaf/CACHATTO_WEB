@@ -1,0 +1,36 @@
+/* ============================================================
+   CACHATTO – Master CSS
+   Imports all modular stylesheets in dependency order.
+   ============================================================ */
+
+/* ── Base ───────────────────────────────────────────────────── */
+@import "base/variables.css";
+@import "base/reset.css";
+@import "base/typography.css";
+@import "base/utilities.css";
+@import "base/animations.css";
+
+/* ── Components ─────────────────────────────────────────────── */
+@import "components/buttons.css";
+@import "components/nav.css";
+@import "components/footer.css";
+
+/* ── Sections ───────────────────────────────────────────────── */
+@import "sections/hero.css";
+@import "sections/customer-showcase.css";
+@import "sections/trust-bar.css";
+@import "sections/policy.css";
+@import "sections/perimeter.css";
+@import "sections/usecases.css";
+@import "sections/features.css";
+@import "sections/articles.css";
+@import "sections/testimonials.css";
+@import "sections/faq.css";
+@import "sections/cta-banner.css";
+@import "sections/product-lineup.css";
+@import "sections/partnerships.css";
+@import "sections/trusted-clients.css";
+@import "sections/brochure.css";
+
+/* ── Responsive (must be last) ──────────────────────────────── */
+@import "base/responsive.css";

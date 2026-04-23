@@ -1,0 +1,95 @@
+/* ── 14. RELATED ARTICLES ─────────────────────────────────── */
+.articles-section {
+  background: var(--c-bg-section);
+}
+
+.articles-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+}
+
+.art-card {
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+
+.art-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.art-card__thumb {
+  height: 190px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.art-card__thumb .material-symbols-outlined {
+  font-size: 52px;
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  z-index: 1;
+}
+
+.art-card__body {
+  padding: var(--s3);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.art-card__tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--c-blue);
+  margin-bottom: var(--s1);
+}
+
+.art-card__title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--c-text);
+  line-height: 1.35;
+  margin-bottom: var(--s1);
+}
+
+.art-card__desc {
+  font-size: 13px;
+  color: var(--c-text-muted);
+  line-height: 1.65;
+  margin-bottom: var(--s2);
+  flex: 1;
+}
+
+.art-card__read {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-blue);
+  margin-top: auto;
+  transition: gap 0.2s;
+}
+
+.art-card__read:hover {
+  gap: 10px;
+}
+
+.art-card__read .material-symbols-outlined {
+  font-size: 16px;
+}

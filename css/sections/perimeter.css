@@ -1,0 +1,88 @@
+/* ── 11. PERIMETER SECTION ────────────────────────────────── */
+.perimeter-section {
+  background: var(--c-navy);
+}
+
+.perimeter-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s8);
+  align-items: center;
+}
+
+.perimeter-content h2 {
+  color: #fff;
+  margin-bottom: var(--s3);
+}
+
+.perimeter-content>p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.60);
+  margin-bottom: var(--s4);
+  line-height: 1.7;
+}
+
+.perimeter-points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+
+.p-point {
+  display: flex;
+  gap: var(--s2);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--r-md);
+  padding: var(--s3);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.p-point:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(0, 153, 230, 0.3);
+}
+
+.p-point__icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  background: rgba(0, 153, 230, 0.15);
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-point__icon .material-symbols-outlined {
+  font-size: 20px;
+  color: #60BFFF;
+}
+
+.p-point__title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.p-point__desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.50);
+  line-height: 1.6;
+}
+
+.perimeter-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.perimeter-visual img {
+  max-width: 100%;
+  border-radius: var(--r-lg);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.50);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}

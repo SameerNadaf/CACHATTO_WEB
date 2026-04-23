@@ -1,0 +1,52 @@
+/* ── 13. FEATURES GRID ────────────────────────────────────── */
+.features-grid {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s3);
+}
+
+.feat-item {
+  display: flex;
+  gap: var(--s2);
+  padding: var(--s3);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  background: #fff;
+  transition: border-color 0.22s, box-shadow 0.22s;
+}
+
+.feat-item:hover {
+  border-color: rgba(0, 87, 184, 0.25);
+  box-shadow: var(--shadow-md);
+}
+
+.feat-item__icon {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  background: rgba(0, 87, 184, 0.08);
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feat-item__icon .material-symbols-outlined {
+  font-size: 25px;
+  color: var(--c-blue);
+}
+
+.feat-item__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--c-text);
+  margin-bottom: 5px;
+}
+
+.feat-item__desc {
+  font-size: 13px;
+  color: var(--c-text-muted);
+  line-height: 1.6;
+}
